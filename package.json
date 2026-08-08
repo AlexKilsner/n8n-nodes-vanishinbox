@@ -1,0 +1,56 @@
+{
+  "name": "n8n-nodes-vanishinbox",
+  "version": "0.1.0",
+  "description": "n8n community node for VanishInbox — generate disposable email inboxes and catch inbound mail (including OTPs) as an n8n trigger.",
+  "keywords": [
+    "n8n-community-node-package",
+    "vanishinbox",
+    "email",
+    "disposable-email",
+    "temp-email",
+    "otp"
+  ],
+  "license": "MIT",
+  "homepage": "https://vanishinbox.com",
+  "author": {
+    "name": "Alex K",
+    "email": "hello@vanishinbox.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexKilsner/n8n-nodes-vanishinbox.git"
+  },
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc && gulp build:icons",
+    "dev": "tsc --watch",
+    "lint": "eslint nodes credentials package.json --ext .ts,.js",
+    "lintfix": "eslint nodes credentials package.json --ext .ts,.js --fix",
+    "prepublishOnly": "npm run build && npm run lint"
+  },
+  "files": [
+    "dist"
+  ],
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "credentials": [
+      "dist/credentials/VanishInboxApi.credentials.js"
+    ],
+    "nodes": [
+      "dist/nodes/VanishInbox/VanishInbox.node.js",
+      "dist/nodes/VanishInboxTrigger/VanishInboxTrigger.node.js"
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint-plugin-n8n-nodes-base": "^1.16.0",
+    "gulp": "^4.0.2",
+    "jsonc-eslint-parser": "^2.4.0",
+    "n8n-workflow": "^1.60.0",
+    "typescript": "^5.4.0"
+  },
+  "peerDependencies": {
+    "n8n-workflow": "*"
+  }
+}

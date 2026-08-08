@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "es2019",
+    "module": "commonjs",
+    "lib": ["es2019", "es2020.promise", "es2020.bigint", "es2020.string"],
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true,
+    "outDir": "./dist",
+    "rootDir": ".",
+    "resolveJsonModule": true,
+    "incremental": true
+  },
+  "include": ["credentials/**/*", "nodes/**/*"],
+  "exclude": ["node_modules", "dist", "**/*.test.ts"]
+}
