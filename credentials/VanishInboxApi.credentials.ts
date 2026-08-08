@@ -25,7 +25,6 @@ export class VanishInboxApi implements ICredentialType {
 		},
 	];
 
-	// Applied to every request made with this credential — attaches the Bearer token automatically.
 	authenticate: IAuthenticateGeneric = {
 		type: 'generic',
 		properties: {
@@ -35,7 +34,6 @@ export class VanishInboxApi implements ICredentialType {
 		},
 	};
 
-	// n8n calls this when the user clicks "Test" on the credential — confirms the key actually works.
 	test: ICredentialTestRequest = {
 		request: {
 			baseURL: 'https://vanishinbox.com/api/v1',
