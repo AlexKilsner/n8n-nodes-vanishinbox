@@ -3,12 +3,14 @@ import type {
 	ICredentialTestRequest,
 	ICredentialType,
 	INodeProperties,
+	Icon,
 } from 'n8n-workflow';
 
 export class VanishInboxApi implements ICredentialType {
 	name = 'vanishInboxApi';
 	displayName = 'VanishInbox API';
 	documentationUrl = 'https://vanishinbox.com/docs/api';
+	icon: Icon = 'file:../nodes/VanishInbox/vanishinbox.svg';
 
 	properties: INodeProperties[] = [
 		{
