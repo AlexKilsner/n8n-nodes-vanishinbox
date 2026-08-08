@@ -37,8 +37,6 @@ export class VanishInbox implements INodeType {
 				],
 				default: 'inbox',
 			},
-
-			// ─── Inbox operations ──────────────────────────────────────────────
 			{
 				displayName: 'Operation',
 				name: 'operation',
@@ -46,23 +44,11 @@ export class VanishInbox implements INodeType {
 				noDataExpression: true,
 				displayOptions: { show: { resource: ['inbox'] } },
 				options: [
-					{
-						name: 'Generate',
-						value: 'generate',
-						description: 'Create a new disposable inbox address',
-						action: 'Generate a new disposable inbox',
-					},
-					{
-						name: 'Get Emails',
-						value: 'getEmails',
-						description: 'Fetch all emails currently stored for an address',
-						action: 'Get emails for an inbox',
-					},
+					{ name: 'Generate', value: 'generate', description: 'Create a new disposable inbox address', action: 'Generate a new disposable inbox' },
+					{ name: 'Get Emails', value: 'getEmails', description: 'Fetch all emails currently stored for an address', action: 'Get emails for an inbox' },
 				],
 				default: 'generate',
 			},
-
-			// ─── Webhook operations ────────────────────────────────────────────
 			{
 				displayName: 'Operation',
 				name: 'operation',
@@ -70,29 +56,12 @@ export class VanishInbox implements INodeType {
 				noDataExpression: true,
 				displayOptions: { show: { resource: ['webhook'] } },
 				options: [
-					{
-						name: 'Register',
-						value: 'register',
-						description: 'Register a webhook on an address (usually handled automatically by the Trigger node instead)',
-						action: 'Register a webhook',
-					},
-					{
-						name: 'Get',
-						value: 'get',
-						description: 'Fetch webhook metadata for an address',
-						action: 'Get webhook info',
-					},
-					{
-						name: 'Delete',
-						value: 'delete',
-						description: 'Remove the webhook registered on an address',
-						action: 'Delete a webhook',
-					},
+					{ name: 'Register', value: 'register', description: 'Register a webhook on an address (usually handled automatically by the Trigger node instead)', action: 'Register a webhook' },
+					{ name: 'Get', value: 'get', description: 'Fetch webhook metadata for an address', action: 'Get webhook info' },
+					{ name: 'Delete', value: 'delete', description: 'Remove the webhook registered on an address', action: 'Delete a webhook' },
 				],
 				default: 'get',
 			},
-
-			// ─── Account operations ────────────────────────────────────────────
 			{
 				displayName: 'Operation',
 				name: 'operation',
@@ -100,17 +69,10 @@ export class VanishInbox implements INodeType {
 				noDataExpression: true,
 				displayOptions: { show: { resource: ['account'] } },
 				options: [
-					{
-						name: 'Get Usage',
-						value: 'getUsage',
-						description: 'Get API key info and remaining credits',
-						action: 'Get account usage',
-					},
+					{ name: 'Get Usage', value: 'getUsage', description: 'Get API key info and remaining credits', action: 'Get account usage' },
 				],
 				default: 'getUsage',
 			},
-
-			// ─── Shared: address field ─────────────────────────────────────────
 			{
 				displayName: 'Address',
 				name: 'address',
@@ -126,8 +88,6 @@ export class VanishInbox implements INodeType {
 					},
 				},
 			},
-
-			// ─── Webhook: target URL (register only) ───────────────────────────
 			{
 				displayName: 'Target URL',
 				name: 'targetUrl',
@@ -157,11 +117,7 @@ export class VanishInbox implements INodeType {
 						responseData = await vanishInboxApiRequest.call(this, 'POST', '/inbox/generate');
 					} else if (operation === 'getEmails') {
 						const address = this.getNodeParameter('address', i) as string;
-						responseData = await vanishInboxApiRequest.call(
-							this,
-							'GET',
-							`/inbox/${encodedAddress(address)}`,
-						);
+						responseData = await vanishInboxApiRequest.call(this, 'GET', `/inbox/${encodedAddress(address)}`);
 					}
 				} else if (resource === 'webhook') {
 					const address = this.getNodeParameter('address', i) as string;
@@ -169,9 +125,7 @@ export class VanishInbox implements INodeType {
 
 					if (operation === 'register') {
 						const targetUrl = this.getNodeParameter('targetUrl', i) as string;
-						responseData = await vanishInboxApiRequest.call(this, 'POST', path, {
-							target_url: targetUrl,
-						});
+						responseData = await vanishInboxApiRequest.call(this, 'POST', path, { target_url: targetUrl });
 					} else if (operation === 'get') {
 						responseData = await vanishInboxApiRequest.call(this, 'GET', path);
 					} else if (operation === 'delete') {
