@@ -30,5 +30,11 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Ensure npm supports trusted publishing (requires npm >=11.5.1)
+        run: npm install -g npm@latest
+
+      - name: Publish with provenance
+        run: npm publish --provenance --access public
+
       - name: Publish with provenance
         run: npm publish --provenance --access public
